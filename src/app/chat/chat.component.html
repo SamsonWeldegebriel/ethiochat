@@ -1,0 +1,40 @@
+<!-- <div *ngFor="let message of messages">
+  {{message.text}}
+</div>
+<input [(ngModel)]="message"  />
+<button (click)="sendMessage()">Send</button>  -->
+
+<div class="wrapper">
+  <nav class="nav" id="nav">
+    <div class="default-nav">
+      <div class="main-nav">
+        <div class="toggle"></div>
+        <div class="main-nav-item"><a class="main-nav-item-link" href="#">Samson</a></div>
+        <div class="options"></div>
+      </div>
+    </div>
+  </nav>
+  <div class="inner" id="inner">
+    <div class="content" id="content">
+            
+            <div *ngFor="let chat of chats">
+                    <b>{{chat.sender}}: </b>{{chat.message}}<br/>
+                      <i>sent at:{{chat.date}}</i>                 
+            </div>
+            <div *ngFor="let message of messages">
+                {{message.text}}
+          </div>
+    </div>
+  </div>
+  <div class="bottom" id="bottom">
+    <textarea class="input" id="input" [(ngModel)]="message" placeholder="Type a message" ></textarea>
+        <!-- <mat-form-field>
+            <input matInput [(ngModel)]="message" placeholder="type a message" class="input" id="input" />
+        </mat-form-field> -->
+
+        <!-- <mat-form-field class="example-full-width">
+            <textarea matInput [(ngModel)]="message" placeholder="Type a message" class="input" id="input"></textarea>
+        </mat-form-field> -->
+    <div class="send" id="send"  (click)="sendMessage()"></div>
+  </div>
+</div>

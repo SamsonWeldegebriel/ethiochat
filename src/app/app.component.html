@@ -1,0 +1,84 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span><mat-icon class="example-icon">favorite</mat-icon>{{ title }}</span>
+        <span class="example-spacer"></span>
+        <!-- <mat-icon class="example-icon">favorite</mat-icon>
+        <mat-icon class="example-icon">delete</mat-icon> -->
+        <button mat-button>About</button>
+        <button mat-button>Services</button>
+        <button mat-button>Contact</button>
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+</div>
+<div style="text-align:center">
+    <mat-card *ngIf="nameDisplay">
+        <h1>Welcome {{ nameDisplay }}</h1>
+      </mat-card> 
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let user of users">
+      {{user.name}}
+    </li>
+  </ul>
+</div>
+
+<app-chat></app-chat>
+
+<br><br>
+
+<div id="loginform">
+    <form action="index.php" method="post">
+        <p>Please enter your name to continue:</p>
+        <!-- <label for="name">Username:</label>
+        <input type="text" name="name" id="name" />
+        <input type="submit" name="enter" id="enter" value="Enter" /> -->
+        <mat-card>
+            <mat-form-field>
+              <input matInput placeholder="Enter name">
+              <!-- <input matInput [(ngModel)]="username" placeholder="Enter name"> -->
+            </mat-form-field>  
+            <br />    
+            <button mat-raised-button (click)="showName()">Chat Now</button>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+          </mat-card>
+    </form>
+    </div>
+
+<br><br>
+
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Welcome, <b>Samson</b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>    
+    <div id="chatbox"></div>
+     
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" size="63" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>
+
+<!-- <mat-card>
+    <mat-form-field>
+      <input matInput [(ngModel)]="answer" placeholder="Enter name">
+    </mat-form-field>
+  
+    <br>
+    
+    <button mat-raised-button (click)="showAnswer()">Answer me</button>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+  </mat-card>
+  -->
+  
+  <mat-card *ngIf="nameDisplay">
+    <h1>Welcome {{ nameDisplay }}, you're damn right.</h1>
+  </mat-card> 
+  
+ 
