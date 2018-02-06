@@ -16,6 +16,7 @@ router.get('/', function(req, res, next){
 //Save chat
 router.post('/', function(req, res, next){
     var chat = req.body;
+    //{"message" : chat.message, "sender" : chat.sender,"receiver" : chat.receiver,"date" : chat.date}
         db.messages.save(chat, function(err, chat){
             if(err)
                 res.send(err);  

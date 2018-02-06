@@ -9,37 +9,52 @@ import { SocketService } from '../services/socket.service';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
-  messages = [];
+ 
   connection;
   message;
 
   //new test
+  newChatMessage = {
+    message : "",
+    sender : "Test",
+    receiver : "Samson",
+    date : new Date()
+  };
   chats = [];
 
   constructor(private chatService: ChatService, private socketService: SocketService) { 
     this.getChats();
   }
 
+
   sendMessage(){
+    this.newChatMessage.message = this.message;
+    this.chatService.saveChat(this.newChatMessage).subscribe((result) => {
+      this.socketService.emit('send-message', this.newChatMessage);
+      this.message = '';
+    })   
+  }
+
+  /*
+     sendMessage(){
     const msg = {
       text: this.message
     }
     this.socketService.emit('send-message', msg);
     this.message ='';
   }
+  */
 
   getChats(){
-    this.chatService.getChats()
+    this.chatService.getAllChats()
         .subscribe(res => this.chats = res);
   }
 
   ngOnInit() {
     //this.connection =this.chatService.getMessages().subscribe(message => this.messages.push(message));
-    this.messages = new Array();
+    this.chats = new Array();
     this.socketService.on('message-received', (data) => {
-      this.messages.push(data);
-      console.log(data);
-      console.log(this.messages);
+      this.chats.push(data);
     });
   }
 

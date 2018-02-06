@@ -64,3 +64,20 @@ a {
 .logout { float:right; }
 
 .msgln { margin:0 0 2px 0; }
+
+
+/* Users List */
+
+i {  vertical-align: middle; }
+.table-users tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.nav-user-photo {
+     vertical-align: middle;
+}
+.user_panel {
+    width: 50%;
+}
+
+/* Users List */
