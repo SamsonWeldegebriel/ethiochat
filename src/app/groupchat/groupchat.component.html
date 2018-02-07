@@ -1,7 +1,25 @@
 My Group CHat
 
 <!-- Group Chat Box -->
-  <div id="wrapper" *ngIf="loggedInMemberUsername"> 
+
+<!-- List of Members Display  --> 
+<br /><br />
+<div id="userArea" class="row" *ngIf="loggedInMemberUsername">    
+    <div class="col-md-4">
+      <div class="well">
+        <h3>Your Groups List</h3>
+        <ul class="list-group" id="users">
+          <li *ngFor="let user of users" style="list-style: none">
+            <button mat-raised-button (click)="openGroupChat(user)" style="width: 200px">{{user.name}}</button>
+            <!-- <input type="submit" (click)="openChat()" [(ngModel)]="memberName" style="width: 200px" value="{{user.name}}" /> -->
+            <br />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="wrapper"> 
       <div id="menu">
           <p class="welcome">Welcome, <b>{{ loggedInMemberUsername }}</b></p>
           <p class="logout"><a id="exit" href="#">Exit Chat</a></p>

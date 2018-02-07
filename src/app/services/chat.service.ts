@@ -44,6 +44,11 @@ export class ChatService {
     });
   }
 
+  saveStatus(data){
+    return this.http.post(this.url + '/chats/status', data)
+    .map(res => res.json());
+  }
+
   deleteChat(id) {
     return new Promise((resolve, reject) => {
         this.http.delete('/chat/'+id)

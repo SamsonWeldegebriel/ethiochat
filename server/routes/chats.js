@@ -48,6 +48,16 @@ router.get('/:room', function(req, res, next) {
     });
   });
 
+// Update read status
+router.post('/status/', function(req, res, next){
+    var chat = req.body;
+        db.messages.save(chat, function(err, chat){
+            if(err)
+                res.send(err);  
+            res.json(chat);
+        });
+});
+
 
 //Delete chat
 router.delete('/:id', function(req, res, next){

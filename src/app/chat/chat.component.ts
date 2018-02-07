@@ -19,7 +19,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     message : "",
     sender : "",
     receiver : "",
-    date : new Date()
+    date : new Date(),
+    status: false
   };
   chats = [];
   users = [];
@@ -40,6 +41,18 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.chatService.saveChat(this.newChatMessage).subscribe((result) => {
       this.socketService.emit('send-message', this.newChatMessage);
       this.message = '';
+    })   
+  }
+
+  saveStatus(){
+    this.newChatMessage.message = this.message;
+    this.newChatMessage.sender = this.loggedInMemberUsername;
+    this.newChatMessage.receiver = this.receiverName;
+    this.newChatMessage.status = true;
+    this.chatService.saveChat(this.newChatMessage).subscribe((result) => {
+      this.socketService.emit('send-message', this.newChatMessage);
+      this.message = '';
+      this.newChatMessage.status= false;
     })   
   }
 
@@ -81,17 +94,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   
   username: string = '';
   loggedInMemberUsername: string = '';
-  // loggedInMember : {
-  //   id: number,
-  //   name: "test name",
-  //   username: "test",
-  //   password: "14087695",
-  //   phone: "12345678",
-  //   email: "test@gmail.com",
-  //   photo: "asdfasdf.jpg",
-  // };
-
-  //loggedInMemberUsername :'';
+  
   showSpinner: boolean = false;
 
   showName() {
@@ -108,6 +111,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   receiverName: string ='';
   loggedInMember: {};
   openChat(selectedMember){
+    this.saveStatus();
     this.chatOpenned = true;
     this.loggedInMember = selectedMember;
     this.receiverName = selectedMember.username;
