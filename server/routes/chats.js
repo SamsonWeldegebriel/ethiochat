@@ -24,13 +24,19 @@ router.post('/', function(req, res, next){
         });
 })
 
-//Get a single chat by user
-router.get('/:id', function(req, res, next){
-    db.messages.findOne({_id: mongo.ObjectId(req.params.id)},function(err, chat){
+//Get a all chat by a single user
+router.get('/:memberUsername', function(req, res, next){
+    let loggedInUser = req.params.memberUsername;
+    db.messages.find({$or: [{sender: loggedInUser}, {receiver: loggedInUser}]},function(err, chat){
         if(err)
             res.send(err);
         res.json(chat);
     });
+    // db.messages.findOne({_id: mongo.ObjectId(req.params.id)},function(err, chat){
+    //     if(err)
+    //         res.send(err);
+    //     res.json(chat);
+    // });
 });
 
 

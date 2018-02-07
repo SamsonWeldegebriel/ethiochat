@@ -7,10 +7,14 @@ import 'rxjs/add/operator/map';
 export class UserService {
 
   result = [];
-  constructor( private http: Http) { }
+  url: string;
+
+  constructor( private http: Http) { 
+    this.url = 'http://localhost:3000';
+  }
 
   getUsers() {
-    return this.http.get("/users")
+    return this.http.get(this.url + "/users")
       .map(result => this.result = result.json().data);
   }
 }

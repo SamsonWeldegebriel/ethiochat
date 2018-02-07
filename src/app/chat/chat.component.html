@@ -4,20 +4,32 @@
 <input [(ngModel)]="message"  />
 <button (click)="sendMessage()">Send</button>  -->
 
-<div class="wrapper">
+
+ <!-- Welcome Display Bar -->
+ <div style="text-align:center">
+    <mat-card *ngIf="loggedInMemberUsername">
+        <h3>Welcome {{ loggedInMemberUsername }}</h3>
+      </mat-card> 
+  </div>
+
+  
+
+ <!-- Private Chat Form -->
+<div class="wrapper" *ngIf="chatOpenned">
   <nav class="nav" id="nav">
     <div class="default-nav">
       <div class="main-nav">
         <div class="toggle"></div>
-        <div class="main-nav-item"><a class="main-nav-item-link" href="#">{{ nameDisplay }}</a></div>
+        <div class="main-nav-item"><a class="main-nav-item-link" href="#">{{ receiverName }}</a></div>
         <div class="options"></div>
       </div>
     </div>
   </nav>
+
   <div class="inner" id="inner">
     <div class="content" id="content">
             
-            <div *ngFor="let chat of chats">
+            <div *ngFor="let chat of filteredChats">
                     <b>{{chat.sender}}: </b>{{chat.message}}<br/>
                       <i>sent at:{{chat.date}}</i>                 
             </div>
@@ -28,13 +40,80 @@
   </div>
   <div class="bottom" id="bottom">
     <textarea class="input" id="input" [(ngModel)]="message" placeholder="Type a message" ></textarea>
-        <!-- <mat-form-field>
-            <input matInput [(ngModel)]="message" placeholder="type a message" class="input" id="input" />
-        </mat-form-field> -->
-
-        <!-- <mat-form-field class="example-full-width">
-            <textarea matInput [(ngModel)]="message" placeholder="Type a message" class="input" id="input"></textarea>
-        </mat-form-field> -->
     <div class="send" id="send"  (click)="sendMessage()"></div>
+      
   </div>
 </div>
+
+<div *ngIf="loggedInMemberUsername"></div>
+
+
+
+<!-- List of Members Display  --> 
+<br /><br />
+<div id="userArea" class="row" *ngIf="loggedInMemberUsername">    
+    <div class="col-md-4">
+      <div class="well">
+        <h3>Members List</h3>
+        <ul class="list-group" id="users">
+          <li *ngFor="let user of users" style="list-style: none">
+            <button mat-raised-button (click)="openChat(user)" style="width: 200px">{{user.name}}</button>
+            <!-- <input type="submit" (click)="openChat()" [(ngModel)]="memberName" style="width: 200px" value="{{user.name}}" /> -->
+            <br />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+      
+  <!-- Login area -->
+       <div id="loginform" *ngIf="loggedInMemberUsername == false">    
+          <p>Please enter your name to continue:</p>
+          <mat-card>
+              <mat-form-field>
+                <!-- <input matInput placeholder="Enter name"> -->
+                <input matInput [(ngModel)]="username" placeholder="Enter name">
+              </mat-form-field>  
+              <br />    
+              <button mat-raised-button (click)="showName()">Chat Now</button>
+              <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            </mat-card>         
+      </div>
+  
+     <br /><br />
+
+   
+  <!-- Group Chat Box -->
+  <!-- <div id="wrapper" *ngIf="loggedInMemberUsername"> 
+      <div id="menu">
+          <p class="welcome">Welcome, <b>{{ loggedInMemberUsername }}</b></p>
+          <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+          <div style="clear:both"></div>
+      </div>    
+      <div id="chatbox"></div>
+       
+      <form name="message" action="">
+          <input name="usermsg" type="text" id="usermsg" size="63" />
+          <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+      </form>
+    </div> -->
+
+<!-- Alternative Group Chat Form -->
+<!-- <div class="container">  
+
+    <div class="col-md-8">
+      <div class="chat" id="chat"></div>
+
+        <form id="messageForm">
+          <div class="form-group">
+            <label>Enter Message</label>
+            <textarea class="form-control" id="message"></textarea>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Send Message" />
+          </div>
+        </form>
+
+    </div>
+
+  </div>  -->

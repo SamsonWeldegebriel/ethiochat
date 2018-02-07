@@ -3,7 +3,7 @@
   https://goo.gl/6Z1p5J
 -->
 
-<!--The content below is only a placeholder and can be replaced.-->
+<!--Navigation bar for the all pages.-->
 <div>
   <mat-toolbar color="primary">
     <mat-toolbar-row>
@@ -11,92 +11,18 @@
         <span class="example-spacer"></span>
         <!-- <mat-icon class="example-icon">favorite</mat-icon>
         <mat-icon class="example-icon">delete</mat-icon> -->
-        <button mat-button>About</button>
-        <button mat-button>Services</button>
-        <button mat-button>Contact</button>
+        <a [routerLink]="['']"><button mat-button>Home</button> </a>
+         <a [routerLink]="['groupchat']"> <button mat-button>Groups</button> </a>
+        <button mat-button>Logout</button>
       </mat-toolbar-row>
   </mat-toolbar>
 </div>
-<div style="text-align:center">
-    <mat-card *ngIf="nameDisplay">
-        <h3>Welcome {{ nameDisplay }}</h3>
-      </mat-card> 
-</div>
 
-<div class="container">
+<router-outlet></router-outlet>
 
-    <div id="userFormArea" class="row">    
-        <div class="col-md-12">
-        
-        </div>
-    </div>
-
-
-  <div id="messageArea" class="row">    
-    <div class="col-md-4">
-      <div class="well">
-        <h3>Friends List</h3>
-        <ul class="list-group" id="users">
-          <li *ngFor="let user of users">
-            {{user.name}}
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-md-8">
-      <div class="chat" id="chat"></div>
-
-        <form id="messageForm">
-          <div class="form-group">
-            <label>Enter Message</label>
-            <textarea class="form-control" id="message"></textarea>
-            <br />
-            <input type="submit" class="btn btn-primary" value="Send Message" />
-          </div>
-        </form>
-
-    </div>
-
-  </div>
-</div>  
-
-<br><br>
-
-    <div id="loginform" *ngIf="nameDisplay == false">    
-        <p>Please enter your name to continue:</p>
-        <mat-card>
-            <mat-form-field>
-              <!-- <input matInput placeholder="Enter name"> -->
-              <input matInput [(ngModel)]="username" placeholder="Enter name">
-            </mat-form-field>  
-            <br />    
-            <button mat-raised-button (click)="showName()">Chat Now</button>
-            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-          </mat-card>         
-    </div>
-
-<br><br>
-
-<div id="wrapper" *ngIf="nameDisplay"> 
-    <div id="menu">
-        <p class="welcome">Welcome, <b>{{ nameDisplay }}</b></p>
-        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
-        <div style="clear:both"></div>
-    </div>    
-    <div id="chatbox"></div>
-     
-    <form name="message" action="">
-        <input name="usermsg" type="text" id="usermsg" size="63" />
-        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
-    </form>
-</div>
-
-<div *ngIf="nameDisplay">
-    <app-chat></app-chat>
-    </div>
+<!-- <app-chat></app-chat> -->
     
+
   
   
   
- 

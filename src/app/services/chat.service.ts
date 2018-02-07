@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { UserService } from './user.service';
 
 @Injectable()
 export class ChatService {
 
   url: string;
 
-  constructor( private http: Http) {
+  constructor( private http: Http, private userService : UserService) {
     this.url = 'http://localhost:3000';
    }
   
@@ -21,8 +22,8 @@ export class ChatService {
         .map(res => res.json())
   }
 
-  showChatByUser(id) {
-    return this.http.get(this.url + '/chat/' + id)
+  getChatByUser(memberUsername) {
+    return this.http.get(this.url + '/chats/' + memberUsername)
           .map(res => res.json());
   }
 
