@@ -27,7 +27,7 @@ export class GroupchatComponent implements OnInit {
   filteredChats = [];
 
   constructor(private chatService: ChatService, private socketService: SocketService, private userService: UserService) { 
-    //this.getChats();
+    this.getChats();
     this.userService .getUsers()
       .subscribe(res => this.groups = res);
   }
@@ -56,6 +56,7 @@ export class GroupchatComponent implements OnInit {
   getChats(){
     this.chatService.getAllChats()
         .subscribe(res => this.chats = res);
+        
   }
 
   getChatsByLoggedInUser(loginName){
